@@ -6,7 +6,7 @@ import Emoji from "..";
  afterEach(cleanup);
 
  describe('Nav component', () => {
- // baseline test
+ // baseline test Nav
   it('renders', () => {
     render(<Nav />);
   });
