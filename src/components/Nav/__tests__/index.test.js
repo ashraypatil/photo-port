@@ -1,40 +1,37 @@
+// __tests__/Nav.test.js with hard coded categories
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Nav from '..';
-import Emoji from "..";
- afterEach(cleanup);
 
- describe('Nav component', () => {
- // baseline test Nav
+afterEach(cleanup);
+
+describe('Nav component', () => {
   it('renders', () => {
     render(<Nav />);
   });
 
- // snapshot test
- it('matches snapshot', () => {
- const { container } = render(<Nav />);
- expect(container).toMatchSnapshot();
-   });
- })
+  it('matches snapshot', () => {
+    const { asFragment } = render(<Nav />);
 
- describe('emoji is visible', () => {
+    expect(asFragment()).toMatchSnapshot();
+  });
+})
+
+describe('emoji is visible', () => {
   it('inserts emoji into the h2', () => {
-    // Arrange
-    // Act
-    const { getByLabelText } = render(<Emoji />); // Render the Emoji component and destructure getByLabelText
+    const { getByLabelText } = render(<Nav />);
 
-    // Assert
     expect(getByLabelText('camera')).toHaveTextContent('📸');
   });
-});
+})
 
 describe('links are visible', () => {
   it('inserts text into the links', () => {
-    // Arrange
-    // Assert
     const { getByTestId } = render(<Nav />);
+
     expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
     expect(getByTestId('about')).toHaveTextContent('About me');
   });
+
 })
